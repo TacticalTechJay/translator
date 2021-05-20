@@ -29,6 +29,6 @@ async function translateText(text, targets) {
     if (!Array.isArray(targets)) throw new Errors('Target must be an array.');
     const url = new URL('https://api.cognitive.microsofttranslator.com/translate?api-version=3.0')
     targets.forEach(target => url.searchParams.append('to', target));
-    const translation = (await fetch(url, 'POST').header('Ocp-Apim-Subscription-Key', process.env.AZURE_KEY).body([{"text": text}]).send()).json();
-    return translation;
+    const results = (await fetch(url, 'POST').header('Ocp-Apim-Subscription-Key', process.env.AZURE_KEY).body([{"text": text}]).send()).json();
+    return results;
 }
