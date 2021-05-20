@@ -1,28 +1,11 @@
-import { CommandClient } from 'eris';
+import { Client } from 'eris';
 import fetch from 'petitio';
-import { readdirSync } from 'fs';
 
 
-const bot = new CommandClient(process.env.DISCORD_TOKEN, {getAllUsers: false}, {description: 'A translator discord bot.', name: 'Translator', owner: 'Jay', prefix: '!'});
+const bot = new Client(process.env.DISCORD_TOKEN);
 
 bot.on('ready', async () => {
     console.log('ready');
-    // const Module = new (await import(`./commands/eval.js`)).default();
-    // console.log(Module.default);
-    // bot.registerCommand(Module.default);
-
-    // const files = readdirSync('./src/commands/', {encoding: 'utf8'});
-    // console.log(files);
-    // files.forEach(async file => {
-    //     try {
-    //         const Module = await import(`./commands/${file}`);
-    //         console.log(Module.default);
-    //         bot.registerCommand(Module.default);
-    //     } catch(e) {
-    //         throw new Error(`Oopsy doopsy, we made a fucky wucky owo:\n${e}`);
-    //     }
-    //     console.log(file);
-    // })
 });
 
 bot.on('messageCreate', async (msg) => {
