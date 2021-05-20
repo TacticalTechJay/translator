@@ -4,9 +4,7 @@
   "description": "A discord bot translator",
   "main": "index.js",
   "scripts": {
-    "build:src": "tateru submodule dist_bundle",
-    "build:test": "tateru tests",
-    "test": "node -r dotenv/config src/index.js"
+    "run": "node -r dotenv/config src/index.js"
   },
   "type": "module",
   "author": "TacticalTechJay",
