@@ -2,12 +2,14 @@ import { Client } from 'eris';
 import fetch from 'petitio';
 
 
-const bot = new Client(process.env.DISCORD_TOKEN, { allowedMentions: {
-    everyone: false,
-    roles: false,
-    users: false,
-    repliedUser: false
-} });
+const bot = new Client(process.env.DISCORD_TOKEN, { 
+    allowedMentions: {
+        everyone: false,
+        roles: false,
+        users: false,
+        repliedUser: false
+    }
+});
 
 bot.on('ready', async () => {
     console.log('ready');
@@ -15,7 +17,6 @@ bot.on('ready', async () => {
 
 bot.on('messageCreate', async (msg) => {
     if (msg.author.bot) return;
-    if (msg.author.id == '127888387364487168' && msg.channel.id == '840311970116796426') return eval(msg.content);
     if (msg.channel.parentID !== '839965910378479676') return;
     if (msg.content.length > 200) return await msg.channel.createMessage({
         content: `⚠️ Please limit your message length to below 200 characters. Your current message length is ${msg.content.length}. ⚠️`,
