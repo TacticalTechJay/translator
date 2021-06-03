@@ -26,9 +26,11 @@ bot.on('messageCreate', async msg => {
     };
     const args = msg.content.replace(/<@!/g, "<@").substring(guildCf.prefix?.length || bot.prefix.length).trim().split(/\s+/g);
     const x = args.shift();
+    console.log(x);
     let Command = bot.commands.get(x);
+    console.log(Command);
     for (const Cmd of bot.commands.values()) if (Cmd.aliases?.has(x)) return Command = Cmd;
-    console.log(Command.label);
+    console.log(Command);
     try {
         if (!args && Command.argsRequired) return msg.channel.createMessage('Missing arguments!');
         if (!Command) throw 'No command.'
