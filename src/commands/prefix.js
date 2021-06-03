@@ -36,3 +36,4 @@ class Prefix extends Command {
 }
 
 export default Prefix;
+console.log('hi')
