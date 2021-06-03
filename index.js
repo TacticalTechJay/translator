@@ -28,12 +28,8 @@ bot.on('messageCreate', async msg => {
     const x = args.shift();
     let Command = bot.commands.get(x);
     if (!Command) for (const Cmd of bot.commands.values()) if (Cmd.aliases.includes(x)) Command = Cmd;
-    console.log(Command)
-    console.log(Command.execute);
     try {
         if (!args && Command.argsRequired) return msg.channel.createMessage('Missing arguments!');
-        console.log(Command);
-        console.log(Command.execute);
         if (!Command) throw 'No command.'
         Command.execute(msg, args, bot.prisma, guildCf);
     } catch(e) {
