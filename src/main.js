@@ -27,6 +27,7 @@ class TranslateClient extends Client {
             const Command = new (await import(`./commands/${file}`)).default()
             this.commands.set(Command.label, Command);
         }
+        return true;
     }
 
     async translateText(text, targets, from) {
