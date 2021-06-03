@@ -28,8 +28,8 @@ bot.on('messageCreate', async msg => {
     const x = args.shift();
     console.log(x);
     let Command = bot.commands.get(x);
-    console.log(Command);
-    for (const Cmd of bot.commands.values()) if (Cmd.aliases?.has(x)) return Command = Cmd;
+    for (const Cmd of bot.commands.values()) return console.log(Cmd);
+    // if (Cmd.aliases?.has(x)) return Command = Cmd;
     console.log(Command);
     try {
         if (!args && Command.argsRequired) return msg.channel.createMessage('Missing arguments!');
