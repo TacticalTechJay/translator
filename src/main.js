@@ -15,7 +15,6 @@ class TranslateClient extends Client {
             }
         });
         this.prisma = new PrismaClient();
-        this.prefix = process.env.PREFIX;
         this._loadCommands();
     }
 
