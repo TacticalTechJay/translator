@@ -3,7 +3,8 @@ import { Command } from "eris";
 class Prefix extends Command {
     constructor() {
         super('prefix', 'null', {
-            description: 'Change your guild\'s prefix for this bot.'
+            description: 'Change your guild\'s prefix for this bot.',
+            usage: '[Prefix/`check`/ ]'
         })
         this.execute = async (message, args, prisma, guildCf) => {
             if (!message.member.permissions.has("manageChannels")) return message.channel.createMessage('You need `MANAGE_CHANNELS` permission to use this command.');
