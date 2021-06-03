@@ -31,6 +31,7 @@ bot.on('messageCreate', async msg => {
     try {
         if (!args && Command.argsRequired) return msg.channel.createMessage('Missing arguments!');
         if (!Command) throw 'No command.'
+        console.log(Command);
         Command.execute(msg, args, bot.prisma, guildCf);
     } catch(e) {
         if (e === 'No command.') return console.log('No Command');
