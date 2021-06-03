@@ -34,7 +34,7 @@ bot.on('messageCreate', async msg => {
         if (!Command) throw 'No command.'
         Command.execute(msg, args, bot.prisma, guildCf);
     } catch(e) {
-        if (e === 'No command.') return console.log('No Command');
+        if (e === 'No command.') return;
         return console.error(e);
     }
 });
