@@ -11,7 +11,7 @@ class Evaluate extends Command {
         this.execute = this.exec;
     }
     
-    async exec(message, args, prisma) {
+    async exec(message, args, prisma, guildCf) {
         const allowed = ['127888387364487168', '328983966650728448']
         if (!allowed.includes(message.author.id)) return;
         let input = args.join(' ');

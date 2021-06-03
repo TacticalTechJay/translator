@@ -1,18 +1,12 @@
 import TranslateClient from './src/main.js'
-import { config } from 'dotenv'
 
-config()
 const bot = new TranslateClient(process.env.DISCORD_TOKEN);
 
 bot.on('messageCreate', async msg => {
     if (msg.author.bot || !msg.guildID) return;
-    if (!msg.content.startsWith(bot.prefix)) {
+    const guildCf = await bot.prisma.guild.findUnique({ where: { id: msg.guildID }});
+    if (!msg.content.startsWith(guildCf?.prefix || bot.prefix)) {
         if (msg.content.length > 950) return;
-        const guildCf = await bot.prisma.guild.findUnique({
-            where: {
-                id: msg.guildID
-            }
-        });
         if (!guildCf || !guildCf?.channels[0]) return;
         const channels = guildCf.channels.filter(c => msg.channel.id !== c.id);
         if (channels.toString() == guildCf.channels.toString()) return;
@@ -30,12 +24,12 @@ bot.on('messageCreate', async msg => {
             return console.error(e);
         }
     };
-    const args = msg.content.replace(/<@!/g, "<@").substring(bot.prefix.length).trim().split(/\s+/g);
+    const args = msg.content.replace(/<@!/g, "<@").substring(guildCf.prefix?.length || bot.prefix.length).trim().split(/\s+/g);
     const Command = bot.commands.get(args.shift());
     try {
         if (!args && Command.argsRequired) return msg.channel.createMessage('Missing arguments!');
         if (!Command) throw 'No command.'
-        Command.execute(msg, args, bot.prisma);
+        Command.execute(msg, args, bot.prisma, guildCf);
     } catch(e) {
         if (e === 'No command.') return;
         return console.error(e);
