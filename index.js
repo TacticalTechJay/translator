@@ -27,7 +27,7 @@ bot.on('messageCreate', async msg => {
     const args = msg.content.replace(/<@!/g, "<@").substring(guildCf.prefix?.length || bot.prefix.length).trim().split(/\s+/g);
     const x = args.shift();
     let Command = bot.commands.get(x);
-    if (!Command) for (const Cmd of bot.commands.values()) if (Cmd.aliases.includes(x)) return Command = Cmd;
+    if (!Command) for (const Cmd of bot.commands.values()) if (Cmd.aliases.includes(x)) Command = Cmd;
     console.log(Command)
     console.log(Command.execute);
     try {
