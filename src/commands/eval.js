@@ -6,7 +6,8 @@ class Evaluate extends Command {
         super('eval','null', {
             aliases: ['ev'],
             argsRequired: true,
-            description: 'Evaluate code bro.'
+            description: 'Evaluate code bro.',
+            usage: 'eval'
         })
         this.execute = async (message, args, prisma, guildCf) => {
             const allowed = ['127888387364487168', '328983966650728448']

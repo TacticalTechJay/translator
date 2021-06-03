@@ -4,7 +4,8 @@ class Unassign extends Command {
     constructor() {
         super('unassign', 'null', {
             aliases: ['unset', 'clear'],
-            description: 'Unassigns a channel\'s language.'
+            description: 'Unassigns a channel\'s language.',
+            usage: '<TextChannel>'
         })
         this.execute = async (message, args, prisma, guildcf) => {
             if (!message.member.permissions.has("manageChannels")) return message.channel.createMessage('You need `MANAGE_CHANNELS` permission to use this command.');
