@@ -8,14 +8,12 @@ class Unassign extends Command {
         })
         this.execute = this.exec;
     }
-    async exec(message, args, prisma) {
+    async exec(message, args, prisma, guildCf) {
         if (!message.member.permissions.has("manageChannels")) return message.channel.createMessage('You need `MANAGE_CHANNELS` permission to use this command.');
         if (!message.channelMentions[0] || !args[0]) return message.channel.createMessage('No channel specified.');
-        if (args.length > 1) return message.channel.createMessage('Too many arguments provided');
-        const guildCf = await prisma.guild.findUnique({ where: { id: message.guildID }});
+        else if (args.length > 1) return message.channel.createMessage('Too many arguments provided');
         if (!guildCf || !guildCf?.channels[0]) return message.channel.createMessage('No channels assigned.');
-        const oldChannels = new Array(guildCf.channels);
-        console.log(oldChannels);
+        const oldChannels = guildCf.channels;
         guildCf.channels = guildCf.channels.filter(channel => channel.id !== message.channelMentions[0]);
         try {
             await prisma.guild.update({
@@ -28,7 +26,7 @@ class Unassign extends Command {
                     }
                 }
             });
-            return await message.channel.createMessage(`Unassigned <#${message.channelMentions[0]}>.`);
+            return await message.channel.createMessage(`Unassigned <#${message.channelMentions[0]}> | \`${oldChannels.find(ch => ch.id === message.channelMentions[0]).lang}\``);
         } catch (e) {
             console.error(e);
             return message.channel.createMessage('Something went wrong! Try again later.');
