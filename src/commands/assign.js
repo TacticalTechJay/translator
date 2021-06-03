@@ -14,7 +14,8 @@ class Assign extends Command {
             if (!args[1]) return message.channel.createMessage('The correct usage would be: `!assign #Channel <lang>`');
             else if (args.length > 2) return message.channel.createMessage('Too many arguments provided.');
             const op = langKeys.filter(a => a === args[1].toLowerCase())[0] || langKeys.filter(lang => languages[lang].name.toLowerCase() === args[1].toLowerCase())[0]
-            if (!op) return message.channel.createMessage('That\'s... not a supported language.');
+            if (!op) return message.channel.createMessage('That\'s... not a supported language.')
+            else if (!message.channnel.guild.channels.has(message.channelMentions[0] || args[0])) return message.channel.createMessage('⚠️ Invalid channel! ⚠️');
             if (!guildCf) guildCf = await prisma.guild.create({data: { id: message.guildID }});
             if (guildCf.channels.filter(a => a.id === message.channelMentions[0])[0]) return message.channel.createMessage('This channel is already assigned a language.');
             if (guildCf.channels.filter(a => a.lang === op)[0]) return message.channel.createMessage(`A channel already has that language. <#${guildCf.channels.filter(a => a.lang ===op)[0].id}>`);
