@@ -10,7 +10,9 @@ class Help extends Command {
         this.execute = (message, args, prisma, guildCf) => {
             if (!args[0]) {
                 let res = '';
-                message.channel.client.commands.forEach(e => res += `${guildCf?.prefix || process.env.PREFIX}${e.label} - ${e.description}\n`);
+                message.channel.client.commands.forEach(e => {
+                    if (e.label !== 'eval' ) res += `${guildCf?.prefix || process.env.PREFIX}${e.label} - ${e.description}\n`
+                });
                 return message.channel.createMessage(`Here are a list of commands:\n${res}`);
             } else if (args[0]) {
                 const x = message.channel.client.commands.get(args[0].toLowerCase())
