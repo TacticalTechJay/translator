@@ -10,7 +10,7 @@ class Unassign extends Command {
         this.execute = async (message, args, prisma, guildcf) => {
             if (!message.member.permissions.has("manageChannels")) return message.channel.createMessage('You need `MANAGE_CHANNELS` permission to use this command.');
             if (!message.channelMentions[0] || !args[0]) return message.channel.createMessage('No channel specified.');
-            else if (!message.channnel.guild.channels.has(message.channelMentions[0] || args[0])) return message.channel.createMessage('⚠️ Invalid channel! ⚠️');
+            else if (!message.channel.guild.channels.has(message.channelMentions[0] || args[0])) return message.channel.createMessage('⚠️ Invalid channel! ⚠️');
             else if (args.length > 1) return message.channel.createMessage('Too many arguments provided');
             if (!guildCf || !guildCf?.channels[0]) return message.channel.createMessage('No channels assigned.');
             const oldChannels = guildCf.channels;
