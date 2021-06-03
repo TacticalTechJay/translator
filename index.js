@@ -26,17 +26,14 @@ bot.on('messageCreate', async msg => {
     };
     const args = msg.content.replace(/<@!/g, "<@").substring(guildCf.prefix?.length || bot.prefix.length).trim().split(/\s+/g);
     const x = args.shift();
-    console.log(x);
     let Command = bot.commands.get(x);
-    for (const Cmd of bot.commands.values()) if (Cmd.aliases.includes(x)) return Command = Cmd;
-
-    console.log(Command);
+    if (!Command) for (const Cmd of bot.commands.values()) if (Cmd.aliases.includes(x)) return Command = Cmd;
     try {
         if (!args && Command.argsRequired) return msg.channel.createMessage('Missing arguments!');
         if (!Command) throw 'No command.'
         Command.execute(msg, args, bot.prisma, guildCf);
     } catch(e) {
-        if (e === 'No command.') return;
+        if (e === 'No command.') return console.log('No Command');
         return console.error(e);
     }
 });
