@@ -5,7 +5,7 @@ const bot = new TranslateClient(process.env.DISCORD_TOKEN);
 bot.on('messageCreate', async msg => {
     if (msg.author.bot || !msg.guildID) return;
     const guildCf = await bot.prisma.guild.findUnique({ where: { id: msg.guildID }});
-    if (msg.content === `<@!${bot.user.id}>`) return msg.channel.createMessage(`Prefix is ${guildCf?.prefix || process.env.PREFIX}`);
+    if (msg.content === `<@!${bot.user.id}>`) return msg.channel.createMessage(`Prefix is \`${guildCf?.prefix || process.env.PREFIX}\``);
     if (!msg.content.startsWith(guildCf?.prefix || bot.prefix)) {
         if (msg.content.length > 950) return;
         if (!guildCf || !guildCf?.channels[0]) return;
