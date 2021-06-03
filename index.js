@@ -28,7 +28,7 @@ bot.on('messageCreate', async msg => {
     const x = args.shift();
     console.log(x);
     let Command = bot.commands.get(x);
-    for (const Cmd of bot.commands.values()) if (Cmd.aliases.has(x)) return console.log(Cmd);
+    for (const Cmd of bot.commands.values()) if (Cmd.aliases.includes(x)) return Command = Cmd;
 
     console.log(Command);
     try {
