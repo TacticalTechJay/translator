@@ -1,5 +1,5 @@
 import { Command } from "eris";
-import languages from '../languages';
+import languages from "../languages.js";
 const langKeys = Object.keys(languages);
 
 class Language extends Command {
