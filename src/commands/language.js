@@ -10,7 +10,8 @@ class Language extends Command {
             usage: '<add/remove> <Lang>'
         })
         this.execute = async(message, args, prisma, guildCf) => {
-            if (args[0].toLowerCase() === 'add') {
+            if (!args[0]) return message.channel.createMessage('The correct usage would be: !languages add English');
+            else if (args[0].toLowerCase() === 'add') {
                 const op = langKeys.filter(a => a === args[1].toLowerCase())[0] || langKeys.filter(lang => languages[lang].name.toLowerCase() === args[1].toLowerCase())[0]
                 if (!op[0]) return message.channel.createMessage('That\'s... not a valid language.')
                 if (guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already enabled.`);
