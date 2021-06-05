@@ -9,7 +9,7 @@ bot.on('messageCreate', async msg => {
     if (!msg.content.startsWith(guildCf?.prefix || process.env.PREFIX)) {
         if (msg.content.length > 750) return;
         if (!guildCf || !guildCf?.channels[0]) return;
-        if (!guildCf.channels.has(message.channel.id)) return;
+        if (!guildCf.channels.has(msg.channel.id)) return;
         try {
             if (!guildCf.languages[0]) return;
             const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
