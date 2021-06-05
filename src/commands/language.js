@@ -15,12 +15,12 @@ class Language extends Command {
                 if (!op[0]) return message.channel.createMessage('That\'s... not a valid language.')
                 if (guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already enabled.`);
                 try {
-                    guildCf.langs.push(op[0]);
+                    guildCf.languages.push(op[0]);
                     await prisma.guild.update({
                         where: { id: message.guildID },
                         data: guildCf
                     })
-                    return message.channel.createMessage(`I will now${guildCf.langs.length > 1 ? ' also ' : ' '}translate to ${languages[op].name}`)    
+                    return message.channel.createMessage(`I will now${guildCf.languages.length > 1 ? ' also ' : ' '}translate to ${languages[op].name}`)    
                 } catch (e) {
                     console.error(e)
                     return message.channel.createMessage('There was an issue, try again later!')
@@ -30,12 +30,12 @@ class Language extends Command {
                 if (!op[0]) return message.channel.createMessage('That\'s... not a valid language.')
                 if (!guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already enabled.`);
                 try {
-                    guildCf.langs = guildCf.langs.filter(lang => lang !== op[0]);
+                    guildCf.languages = guildCf.languages.filter(lang => lang !== op[0]);
                     await prisma.guild.update({
                         where: { id: message.guildID },
                         data: guildCf
                     })
-                    return message.channel.createMessage(`I will now${guildCf.langs.length > 1 ? ' also ' : ' '}translate to ${languages[op].name}`)    
+                    return message.channel.createMessage(`I will now${guildCf.languages.length > 1 ? ' also ' : ' '}translate to ${languages[op].name}`)    
                 } catch (e) {
                     console.error(e)
                     return message.channel.createMessage('There was an issue, try again later!')
