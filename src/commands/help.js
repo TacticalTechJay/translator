@@ -12,7 +12,7 @@ class Help extends Command {
             if (!args[0]) {
                 let res = '';
                 if (!guildCf.firstRun) {
-                    res += 'Hello from the USA! I am a Translator bot used to unify channels of different languages. My commands may be small on the front, but I am working hard behind the scenes to get your messages translated in the right language!'
+                    res += 'Hello from the USA! I am a Translator bot used to unify channels of different languages. My commands may be small on the front, but I am working hard behind the scenes to get your messages translated in the right language! Here are my commands:\n'
                     guildCf.firstRun = !guildCf.firstRun
                     await prisma.guild.update({
                         where: { id: message.guildID },
