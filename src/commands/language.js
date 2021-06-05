@@ -4,8 +4,8 @@ const langKeys = Object.keys(languages);
 
 class Language extends Command {
     constructor() {
-        super('language', 'null', {
-            aliases: ['lang', 'languages'],
+        super('languages', 'null', {
+            aliases: ['lang', 'language'],
             description: 'Include a language to translate.',
             usage: '<add/remove> <Lang>'
         })
