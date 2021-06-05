@@ -1,5 +1,5 @@
 import TranslateClient from './src/main.js'
-import languages from './src/commands/languages.js';
+import languages from './src/languages.js';
 
 const bot = new TranslateClient(process.env.DISCORD_TOKEN);
 
