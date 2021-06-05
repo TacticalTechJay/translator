@@ -14,10 +14,11 @@ class Language extends Command {
             else if (args[0].toLowerCase() === 'add') {
                 if (!args[1]) return message.channel.createMessage('A language must be provided.');
                 const op = langKeys.filter(a => a === args[1].toLowerCase())[0] || langKeys.filter(lang => languages[lang].name.toLowerCase() === args[1].toLowerCase())[0]
-                if (!op[0]) return message.channel.createMessage('That\'s... not a valid language.')
+                if (!op) return message.channel.createMessage('That\'s... not a valid language.')
                 if (guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already enabled.`);
                 try {
-                    guildCf.languages.push(op[0]);
+                    guildCf.languages.push(op);
+                    console.log(guildCf.languages);
                     await prisma.guild.update({
                         where: { id: message.guildID },
                         data: guildCf
@@ -30,10 +31,10 @@ class Language extends Command {
             } else if (args[0].toLowerCase() === 'remove') {
                 if (!args[1]) return message.channel.createMessage('A language must be provided.');
                 const op = langKeys.filter(a => a === args[1].toLowerCase())[0] || langKeys.filter(lang => languages[lang].name.toLowerCase() === args[1].toLowerCase())[0]
-                if (!op[0]) return message.channel.createMessage('That\'s... not a valid language.')
-                if (!guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already enabled.`);
+                if (!op) return message.channel.createMessage('That\'s... not a valid language.')
+                if (!guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already disabled.`);
                 try {
-                    guildCf.languages = guildCf.languages.filter(lang => lang !== op[0]);
+                    guildCf.languages = guildCf.languages.filter(lang => lang !== op);
                     await prisma.guild.update({
                         where: { id: message.guildID },
                         data: guildCf

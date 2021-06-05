@@ -35,6 +35,7 @@ class TranslateClient extends Client {
         const url = new URL(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0`)
         targets.forEach(target => url.searchParams.append('to', encodeURIComponent(target)));
         const results = (await fetch(url, 'POST').header('Ocp-Apim-Subscription-Key', process.env.AZURE_KEY).body([{"text": text}]).send()).json();
+        if (results.error) return results.error;
         return results[0];
     }
 }
