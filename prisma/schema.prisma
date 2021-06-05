@@ -12,6 +12,8 @@ generator client {
 
 model Guild {
   id        String   @id
-  channels  Json[]
-  prefix    String?
+  channels  String[]
+  langs     String[]
+  prefix    String?  @default("!")
+  firstRun  Boolean  @default(false)
 }

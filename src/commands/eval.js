@@ -10,8 +10,7 @@ class Evaluate extends Command {
             usage: 'eval'
         })
         this.execute = async (message, args, prisma, guildCf) => {
-            const allowed = ['127888387364487168', '328983966650728448']
-            if (!allowed.includes(message.author.id)) return;
+            if (!message.channel.client.devs.includes(message.author.id)) return;
             let input = args.join(' ');
             if (input.startsWith('```js') || input.startsWith('```') && input.endsWith('```')) {
                 input = input.replace(/`/gi, '')

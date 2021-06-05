@@ -7,20 +7,15 @@ bot.on('messageCreate', async msg => {
     const guildCf = await bot.prisma.guild.findUnique({ where: { id: msg.guildID }});
     if (msg.content === `<@!${bot.user.id}>`) return msg.channel.createMessage(`Prefix is \`${guildCf?.prefix || process.env.PREFIX}\``);
     if (!msg.content.startsWith(guildCf?.prefix || process.env.PREFIX)) {
-        if (msg.content.length > 950) return;
+        if (msg.content.length > 750) return;
         if (!guildCf || !guildCf?.channels[0]) return;
-        const channels = guildCf.channels.filter(c => msg.channel.id !== c.id);
-        if (channels.toString() == guildCf.channels.toString()) return;
-        const targets = channels.map(channel => channel.lang);
-        const from = guildCf.channels.filter(c => msg.channel.id == c.id)[0]
+        if (!guildCf.channels.has(message.channel.id)) return;
         try {
-            if (!targets[0]) return;
-            const { translations } = await bot.translateText(msg.content, targets, from.lang);
-            return translations.forEach(t => {
-                const channel = bot.getChannel(guildCf.channels.find(channel => channel.lang == t.to).id)
-                if (!channel) return;
-                return channel.createMessage(`> ${msg.content} - ${msg.author.username} : <#${from.id}> ${from.lang}\n${t.text}`);
-            });
+            if (!guildCf.languages[0]) return;
+            const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
+            let res = `> ${msg.content} - ${msg.author.username} : ${detectedLanguage.language}\n`;
+            translations.filter(x => x.to !== detectedLanguage.language).forEach(x => res += `${x.to}: ${x.text}\n`);
+            return message.channel.createMessage(res);
         } catch (e) {
             return console.error(e);
         }

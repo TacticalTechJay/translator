@@ -14,6 +14,7 @@ class TranslateClient extends Client {
                 repliedUser: false
             }
         });
+        this.devs = ['127888387364487168', '328983966650728448']
         this.prisma = new PrismaClient();
         this._loadCommands();
     }
@@ -29,9 +30,9 @@ class TranslateClient extends Client {
         return true;
     }
 
-    async translateText(text, targets, from) {
+    async translateText(text, targets) {
         if (!Array.isArray(targets)) throw new Errors('Targets must be an array.');
-        const url = new URL(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${from}`)
+        const url = new URL(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0`)
         targets.forEach(target => url.searchParams.append('to', encodeURIComponent(target)));
         const results = (await fetch(url, 'POST').header('Ocp-Apim-Subscription-Key', process.env.AZURE_KEY).body([{"text": text}]).send()).json();
         return results[0];
