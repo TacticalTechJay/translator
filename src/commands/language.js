@@ -22,7 +22,7 @@ class Language extends Command {
                         where: { id: message.guildID },
                         data: guildCf
                     })
-                    return message.channel.createMessage(`I will now${guildCf.languages.length > 1 ? ' also ' : ' '}translate to ${languages[op].name}`)    
+                    return message.channel.createMessage(`I will now${guildCf.languages.length > 1 ? ' also ' : ' '}translate messages in allowed channels to ${languages[op].name}`)    
                 } catch (e) {
                     console.error(e)
                     return message.channel.createMessage('There was an issue, try again later!')
