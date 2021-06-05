@@ -2,7 +2,7 @@ import { Command } from "eris";
 import languages from "../languages.js";
 const langKeys = Object.keys(languages);
 
-class Language extends Command {
+class Languages extends Command {
     constructor() {
         super('languages', 'null', {
             aliases: ['lang', 'language'],
@@ -45,9 +45,8 @@ class Language extends Command {
                     return message.channel.createMessage('There was an issue, try again later!')
                 }
             } else return message.channel.createMessage('The correct usage would be: !languages add English');
-            return message.channel.createMessage('WHAT!?')
         }
     }
 }
 
-export default Language
+export default Languages
