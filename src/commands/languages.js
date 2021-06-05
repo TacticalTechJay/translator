@@ -18,7 +18,6 @@ class Languages extends Command {
                 if (guildCf.languages.filter(lang => lang === op)[0]) return message.channel.createMessage(`Language (\`${guildCf.languages.filter(lang => lang === op)[0]}\`) is already enabled.`);
                 try {
                     guildCf.languages.push(op);
-                    console.log(guildCf.languages);
                     await prisma.guild.update({
                         where: { id: message.guildID },
                         data: guildCf
