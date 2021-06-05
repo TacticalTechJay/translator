@@ -1,5 +1,4 @@
 import { Command } from 'eris';
-const langKeys = Object.keys(languages);
 
 class Enable extends Command {
     constructor() {
