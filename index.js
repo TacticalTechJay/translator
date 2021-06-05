@@ -1,4 +1,3 @@
-import { prisma } from '@prisma/client';
 import TranslateClient from './src/main.js'
 
 const bot = new TranslateClient(process.env.DISCORD_TOKEN);
@@ -21,7 +20,7 @@ bot.on('messageCreate', async msg => {
                 const channel = bot.getChannel(guildCf.channels.find(channel => channel.lang == t.to)?.id)
                 if (!channel) {
                     guildCf.channels = guildCf.channels.filter(x => x.lang !== t.to);
-                    return await prisma.guild.update({
+                    return await bot.prisma.guild.update({
                         where: { id: msg.guildID },
                         data: guildCf
                     })
