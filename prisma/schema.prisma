@@ -13,7 +13,7 @@ generator client {
 model Guild {
   id        String   @id
   channels  String[]
-  languages     String[]
-  prefix    String?  @default("!")
+  languages String[]
+  prefix    String?  @default("?")
   firstRun  Boolean  @default(false)
 }

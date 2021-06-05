@@ -8,6 +8,7 @@ class Help extends Command {
             usage: '[Command]'
         })
         this.execute = async (message, args, prisma, guildCf) => {
+            if (!guildCf) await prisma.guild.create({ data: { id: message.guildID }});
             if (!args[0]) {
                 let res = '';
                 if (!guildCf.firstRun) {
