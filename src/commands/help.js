@@ -7,7 +7,7 @@ class Help extends Command {
             description: 'Display list of commands or get specific help',
             usage: '[Command]'
         })
-        this.execute = (message, args, prisma, guildCf) => {
+        this.execute = async (message, args, prisma, guildCf) => {
             if (!args[0]) {
                 let res = '';
                 if (!guildCf.firstRun) {
