@@ -4,7 +4,7 @@ class Help extends Command {
     constructor() {
         super('help', 'null', {
             aliases: ['cmds', 'h'],
-            description: 'Display list of commands or get specific help',
+            description: 'Display list of commands or get specific help for a command.',
             usage: '[Command]'
         })
         this.execute = async (message, args, prisma, guildCf) => {

@@ -3,8 +3,8 @@ import { Command } from "eris";
 class Disable extends Command {
     constructor() {
         super('disable', 'null', {
-            aliases: ['remove'],
-            description: 'Unassigns a channel\'s language.',
+            aliases: ['disallow', 'unallow'],
+            description: 'Disallows a channel to have messages translated.',
             usage: '<TextChannel>'
         })
         this.execute = async (message, args, prisma, guildCf) => {

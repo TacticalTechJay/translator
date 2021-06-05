@@ -3,8 +3,8 @@ import { Command } from 'eris';
 class Enable extends Command {
     constructor() {
         super('enable', 'null', {
-            aliases: ['add'],
-            description: 'Assign a language to a channel.',
+            aliases: ['allow'],
+            description: 'Allow a channel to have messages translated.',
             usage: '<TextChannel>'
         });
         this.execute = async (message, args, prisma, guildCf) => {
