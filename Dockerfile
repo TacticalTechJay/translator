@@ -2,11 +2,9 @@ FROM node:16
 
 WORKDIR /root/bot
 
-COPY package*.json ./
+COPY . .
 
 RUN npm install
-
-COPY . .
 
 RUN npx prisma generate
 
