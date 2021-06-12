@@ -35,6 +35,12 @@ bot.on('messageCreate', async msg => {
     }
 });
 
+bot.on('guildDelete', async (guild) => {
+    const guildCf = await bot.prisma.guild.findUnique({where: {id: guild.id}});
+    if (!guildCf) return;
+    else bot.prisma.guild.delete({where: {id: guild.id}});    
+})
+
 bot.on('error', console.error);
 
 bot.on('ready', () => {
