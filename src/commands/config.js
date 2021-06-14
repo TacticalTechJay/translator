@@ -39,3 +39,5 @@ class Config extends Command {
         }
     }
 }
+
+export default Config
