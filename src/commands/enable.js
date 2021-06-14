@@ -23,7 +23,7 @@ class Enable extends Command {
                 return await message.channel.createMessage(`I will now translate messages in <#${message.channelMentions[0] || args[0]}>`);
             } catch (e) {
                 console.error(e);
-                return message.channel.createMessage('Something went wrong!')
+                return message.channel.createMessage('Something went wrong! The developer has been notified.')
             }    
         };
     }
