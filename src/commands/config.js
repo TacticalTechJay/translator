@@ -1,6 +1,6 @@
 import { Command } from "eris";
 import { table } from 'table';
-import languages from "../languages";
+import languages from '../languages.js';
 
 class Config extends Command {
     constructor() {
