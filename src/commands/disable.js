@@ -28,7 +28,7 @@ class Disable extends Command {
                     where: { id: message.guildID },
                     data: guildCf
                 });
-                return await message.channel.createMessage(`I will no longer translate messages in <#${message.channelMentions[0]}>`);
+                return await message.channel.createMessage(`I will no longer translate messages in <#${message.channelMentions[0] || args[0]}>`);
             } catch (e) {
                 console.error(e);
                 return message.channel.createMessage('Something went wrong! Try again later.');
