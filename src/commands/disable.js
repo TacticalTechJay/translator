@@ -10,7 +10,8 @@ class Disable extends Command {
         this.execute = async (message, args, prisma, guildCf) => {
             if (!message.member.permissions.has("manageChannels")) return message.channel.createMessage('You need `MANAGE_CHANNELS` permission to use this command.');
             console.log(message.channelMentions[0] ? message.channelMentions[0] : '...yikes')
-            if (!message.channelMentions[0] || !args[0]) return message.channel.createMessage('No channel specified.');
+            console.log(args[0] ? args[0] : '...double yikes');
+            if ((!args[0] || !message.channelMentions[0])) return message.channel.createMessage('No channel specified.');
             else if (!message.channel.guild.channels.has(message.channelMentions[0] || args[0])) {
                 console.log('Hello! You made it here!\n' + guildCf.channels.includes);
                 if (guildCf.channels.includes(message.channelMentions[0] || args[0])) {
