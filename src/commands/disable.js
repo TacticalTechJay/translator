@@ -17,7 +17,7 @@ class Disable extends Command {
                         where: { id: message.guildID },
                         data: guildCf
                     })
-                    return message.channel.createMessage('I have done a hard remove of that channel due to it either no longer existing or I am unable to read messages within that channel.')
+                    return message.channel.createMessage('I will no longer translate messages within that channel. (It appears to be nonexistent anyways.)')
                 } else return message.channel.createMessage('⚠️ Invalid channel! ⚠️');
             }
             else if (args.length > 1) return message.channel.createMessage('Too many arguments provided');
