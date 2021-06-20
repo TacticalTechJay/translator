@@ -16,7 +16,16 @@ class TranslateClient extends Client {
         });
         this.devs = ['127888387364487168', '328983966650728448']
         this.prisma = new PrismaClient();
-        this._loadCommands();
+        (async function() {
+            this.commands = new Map();
+            const files = readdirSync('./src/commands', {encoding: 'utf8'});
+            for (const file of files) {
+                if (!file.endsWith('.js')) return;
+                const Command = new (await import(`./commands/${file}`)).default()
+                this.commands.set(Command.label, Command);
+            }
+            return true;
+        })()
     }
 
     async _loadCommands() {
