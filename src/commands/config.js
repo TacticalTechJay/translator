@@ -11,7 +11,7 @@ class Config extends Command {
         this.execute = async (message, args, prisma, guildCf) => {
             if (!guildCf) guildCf = await prisma.guild.create({ data: {id: message.guildID} })
             const x = table([
-                ['GuildID', 'Channels', 'Languages', 'Prefix'],
+                ['GuildID', 'Channel', 'Language', 'Prefix'],
                 [guildCf.id, `${guildCf.channels?.map(x => x.id)}`, `${guildCf.channels?.map(x => languages[x.lang].name).join('\n') || 'None.'}`, `${guildCf.prefix || process.env.PREFIX}`]
             ], {
                 border: {
