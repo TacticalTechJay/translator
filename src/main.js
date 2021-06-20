@@ -28,17 +28,6 @@ class TranslateClient extends Client {
         })()
     }
 
-    async _loadCommands() {
-        this.commands = new Map();
-        const files = readdirSync('./src/commands', {encoding: 'utf8'});
-        for (const file of files) {
-            if (!file.endsWith('.js')) return;
-            const Command = new (await import(`./commands/${file}`)).default()
-            this.commands.set(Command.label, Command);
-        }
-        return true;
-    }
-
     async translateText(text, targets) {
         if (!Array.isArray(targets)) throw new Errors('Targets must be an array.');
         const url = new URL(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0`)
