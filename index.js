@@ -8,15 +8,15 @@ bot.on('messageCreate', async msg => {
     const guildCf = await bot.prisma.guild.findUnique({ where: { id: msg.guildID }});
     if (msg.content === `<@!${bot.user.id}>`) return msg.channel.createMessage(`Prefix is \`${guildCf?.prefix || process.env.PREFIX}\``);
     if (!msg.content.startsWith(guildCf?.prefix || process.env.PREFIX)) {
-        if (msg.content.length > 750) return;
+        if (msg.content.length > 1024) return;
         if (!guildCf || !guildCf?.channels[0]) return;
         if (!guildCf.channels.includes(msg.channel.id)) return;
         try {
             if (!guildCf.languages[0]) return;
+            let fields = [{name: `${msg.author.username} : ${languages[detectedLanguage.language].nativeName}`, value: msg.content}];
             const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
-            let res = `> ${msg.content} - ${msg.author.username} : ${languages[detectedLanguage.language].nativeName}\n`;
-            translations.filter(x => x.to !== detectedLanguage.language).forEach(x => res += `${languages[x.to].nativeName}: ${x.text}\n`);
-            return msg.channel.createMessage(res);
+            translations.filter(x => x.to !== detectedLanguage.language).forEach(x => fields.push({name: languages[x.to].nativeName, value: x.text}))
+            return msg.channel.createMessage({embed: { type: "rich", fields }})
         } catch (e) {
             return console.error(e);
         }
