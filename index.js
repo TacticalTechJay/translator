@@ -14,9 +14,9 @@ bot.on('messageCreate', async msg => {
         try {
             if (!guildCf.languages[0]) return;
             const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
-            let fields = [{name: languages[detectedLanguage.language].nativeName, value: msg.content}];
+            let fields = [];
             translations.filter(x => x.to !== detectedLanguage.language).forEach(x => fields.push({name: languages[x.to].nativeName, value: x.text}))
-            return msg.channel.createMessage({embed: { type: "rich", fields, footer: {text: `Author of message: ${msg.author.id}`, icon_url: msg.author.dynamicAvatarURL("webp", 4096)} }})
+            return msg.channel.createMessage({embed: { title: `Original Content / ${languages[detectedLanguage.language].nativeName}`, description: `${msg.content}\n  - [Jump to Original Message](${msg.jumpLink})`, type: "rich", fields, footer: {text: msg.author.id, icon_url: msg.author.dynamicAvatarURL("webp", 4096)} }})
         } catch (e) {
             return console.error(e);
         }
