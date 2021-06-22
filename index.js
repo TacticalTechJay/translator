@@ -14,7 +14,7 @@ bot.on('messageCreate', async msg => {
         try {
             if (!guildCf.languages[0]) return;
             const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
-            let fields = [{name: `${msg.author.username} : ${languages[detectedLanguage.language].nativeName}`, value: msg.content}];
+            let fields = [{name: languages[detectedLanguage.language].nativeName, value: msg.content}];
             translations.filter(x => x.to !== detectedLanguage.language).forEach(x => fields.push({name: languages[x.to].nativeName, value: x.text}))
             return msg.channel.createMessage({embed: { type: "rich", fields }})
         } catch (e) {
