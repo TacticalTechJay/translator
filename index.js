@@ -13,8 +13,8 @@ bot.on('messageCreate', async msg => {
         if (!guildCf.channels.includes(msg.channel.id)) return;
         try {
             if (!guildCf.languages[0]) return;
-            let fields = [{name: `${msg.author.username} : ${languages[detectedLanguage.language].nativeName}`, value: msg.content}];
             const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
+            let fields = [{name: `${msg.author.username} : ${languages[detectedLanguage.language].nativeName}`, value: msg.content}];
             translations.filter(x => x.to !== detectedLanguage.language).forEach(x => fields.push({name: languages[x.to].nativeName, value: x.text}))
             return msg.channel.createMessage({embed: { type: "rich", fields }})
         } catch (e) {
