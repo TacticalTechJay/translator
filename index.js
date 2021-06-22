@@ -16,7 +16,7 @@ bot.on('messageCreate', async msg => {
             const { detectedLanguage, translations } = await bot.translateText(msg.content, guildCf.languages);
             let fields = [{name: languages[detectedLanguage.language].nativeName, value: msg.content}];
             translations.filter(x => x.to !== detectedLanguage.language).forEach(x => fields.push({name: languages[x.to].nativeName, value: x.text}))
-            return msg.channel.createMessage({embed: { type: "rich", fields }})
+            return msg.channel.createMessage({embed: { type: "rich", fields, footer: {text: `Author of message: ${msg.author.id}`, icon_url: msg.author.dynamicAvatarURL("webp", 4096)} }})
         } catch (e) {
             return console.error(e);
         }
