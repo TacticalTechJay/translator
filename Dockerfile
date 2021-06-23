@@ -8,4 +8,4 @@ RUN npm install
 
 RUN npx prisma generate
 
-CMD [ "node", "index.js"]
+CMD node index.js
