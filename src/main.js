@@ -12,7 +12,8 @@ class TranslateClient extends Client {
                 roles: false,
                 users: false,
                 repliedUser: false
-            }
+            },
+            restMode: true
         });
         this.devs = ['127888387364487168', '328983966650728448']
         this.prisma = new PrismaClient();
