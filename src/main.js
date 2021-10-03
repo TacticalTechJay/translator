@@ -23,7 +23,7 @@ class TranslateClient extends Client {
         const files = readdirSync('./src/commands', {encoding: 'utf8'});
         for (const file of files) {
             if (!file.endsWith('.js')) return;
-            const Command = new (await import(`./commands/${file}`)).default()
+            const Command = new (await import(`./commands/${file}`)).default();
             this.commands.set(Command.label, Command);
         }
         return true;
@@ -31,10 +31,17 @@ class TranslateClient extends Client {
 
     async translateText(text, targets, from) {
         if (!Array.isArray(targets)) throw new Errors('Targets must be an array.');
-        const url = new URL(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${from}`)
-        targets.forEach(target => url.searchParams.append('to', encodeURIComponent(target)));
-        const results = (await fetch(url, 'POST').header('Ocp-Apim-Subscription-Key', process.env.AZURE_KEY).body([{"text": text}]).send()).json();
-        return results[0];
+        const results = { "translations": [] };
+        results.detectedLanguage = (await fetch(`https://xpirymints.cf/detect?q=${encodeURIComponent(text)}`).send()).json()[0].language;
+        for (const target of targets) {
+            const url = new URL('https://xpirymints.cf/translate').searchParams
+                .append('q', text)
+                .append('source', results.detectedLanguage)
+                .append('target', target);
+            const text = (await fetch(URL).send()).json().translatedText;
+            results.translations.push({ "text": text, "to": target });
+        }
+        return results;
     }
 }
 export default TranslateClient;
