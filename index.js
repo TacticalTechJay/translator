@@ -1,5 +1,7 @@
 import TranslateClient from './src/main.js'
 
+if (!process.env.TLURL && !process.env.PORT) throw 'ERR: No URL or PORT provided.'
+
 const bot = new TranslateClient(process.env.DISCORD_TOKEN);
 
 bot.on('messageCreate', async msg => {

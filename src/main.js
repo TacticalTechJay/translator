@@ -32,10 +32,20 @@ class TranslateClient extends Client {
     async translateText(text, targets, from) {
         if (!Array.isArray(targets)) throw new Errors('Targets must be an array.');
         const results = { "translations": [] };
-        results.detectedLanguage = (await fetch(`https://xpirymints.cf/detect?q=${encodeURIComponent(text)}`, 'POST').send()).json()[0].language;
+        try {
+            results.detectedLanguage = (await fetch(`${process.env.TLURL || `http://localhost:${process.env.PORT}`}/detect?q=${encodeURIComponent(text)}`, 'POST').send()).json()[0].language;
+        } catch (e) {
+            console.error(e);
+            throw 'Something terribly wrong happened.'
+        }
         for (const target of targets) {
-            const url = new URL(`https://xpirymints.cf/translate?q=${encodeURIComponent(text)}&source=${from}&target=${target}`);
-            const result = (await fetch(url, 'POST').send()).json();
+            const url = new URL(`${process.env.TLURL || `http://localhost:${process.env.PORT}`}/translate?q=${encodeURIComponent(text)}&source=${from}&target=${target}`);
+            try {
+                const result = (await fetch(url, 'POST').send()).json();
+            } catch (e) {
+                console.error(e);
+                throw 'Something terribly wrong happened.'
+            }
             results.translations.push({ "text": result.translatedText, "to": target });
         }
         return results;
