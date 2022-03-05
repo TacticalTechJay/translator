@@ -39,10 +39,7 @@ Everything checks out? Ok, now to get with setting this mayhem up!
     ```shell
     npm install
     ```
-    Install Prisma CLI
-    ```shell
-    npm install prisma --save-dev
-    ```
+
     Generate Prisma Client
     ```shell
     npx prisma generate
