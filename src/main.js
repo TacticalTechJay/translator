@@ -33,13 +33,13 @@ class TranslateClient extends Client {
         if (!Array.isArray(targets)) throw new Errors('Targets must be an array.');
         const results = { "translations": [] };
         try {
-            results.detectedLanguage = (await fetch(`${process.env.TLURL || `http://localhost:${process.env.PORT}`}/detect?q=${encodeURIComponent(text)}`, 'POST').send()).json()[0].language;
+            results.detectedLanguage = (await fetch(`${process.env.TLURL || `http://localhost:${process.env.PORT || 80}`}/detect?q=${encodeURIComponent(text)}`, 'POST').send()).json()[0].language;
         } catch (e) {
             console.error(e);
             throw 'Something terribly wrong happened.'
         }
         for (const target of targets) {
-            const url = new URL(`${process.env.TLURL || `http://localhost:${process.env.PORT}`}/translate?q=${encodeURIComponent(text)}&source=${from}&target=${target}`);
+            const url = new URL(`${process.env.TLURL || `http://localhost:${process.env.PORT || 80}`}/translate?q=${encodeURIComponent(text)}&source=${from}&target=${target}`);
             try {
                 const result = (await fetch(url, 'POST').send()).json();
             } catch (e) {
