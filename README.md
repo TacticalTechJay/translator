@@ -51,5 +51,5 @@ Everything checks out? Ok, now to get with setting this mayhem up!
 
     Run the bot!
     ```shell
-    PORT=80 PREFIX=tl\! DISCORD_TOKEN=totallylegittoken DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public" node index.js
+    PORT=80 PREFIX="tl!" DISCORD_TOKEN="totallylegittoken" DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public" node index.js
     ```
