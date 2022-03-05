@@ -42,11 +42,11 @@ class TranslateClient extends Client {
             const url = new URL(`${process.env.TLURL || `http://localhost:${process.env.PORT || 80}`}/translate?q=${encodeURIComponent(text)}&source=${from}&target=${target}`);
             try {
                 const result = (await fetch(url, 'POST').send()).json();
+                results.translations.push({ "text": result.translatedText, "to": target });
             } catch (e) {
                 console.error(e);
                 throw 'Something terribly wrong happened.'
             }
-            results.translations.push({ "text": result.translatedText, "to": target });
         }
         return results;
     }
