@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.10.0",
+    "dotenv": "^16.0.0",
     "eris": "^0.16.1",
     "petitio": "^1.4.0",
     "table": "^6.8.0"

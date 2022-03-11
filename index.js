@@ -1,4 +1,5 @@
 import TranslateClient from './src/main.js'
+import 'dotenv/config'
 
 if (!process.env.TLURL && !process.env.PORT) throw 'ERR: No URL or PORT provided.'
 
