@@ -21,12 +21,12 @@ class Help extends Command {
                 }
                 else res += 'Here are the commands that I have:\n';
                 message.channel.client.commands.forEach(e => {
-                    if (e.label !== 'eval' ) res += `${guildCf?.prefix || process.env.PREFIX}${e.label} - ${e.description}\n`
+                    if (e.label !== 'eval' ) res += `${guildCf?.prefix || process.env.PREFIX || '?'}${e.label} - ${e.description}\n`
                 });
                 return message.channel.createMessage(res);
             } else if (args[0]) {
                 const x = message.channel.client.commands.get(args[0].toLowerCase())
-                return x ? message.channel.createMessage(`${guildCf?.prefix || process.env.PREFIX}${x.label} - ${x.description}${x.aliases ? `\nAliases: ${x.aliases.join(', ')}` : ''}\n\nUsage: ${guildCf?.prefix || process.env.PREFIX}${x.label} ${x.usage}`) : message.channel.createMessage('That is not a valid command.')
+                return x ? message.channel.createMessage(`${guildCf?.prefix || process.env.PREFIX || '?'}${x.label} - ${x.description}${x.aliases ? `\nAliases: ${x.aliases.join(', ')}` : ''}\n\nUsage: ${guildCf?.prefix || process.env.PREFIX || '?'}${x.label} ${x.usage}`) : message.channel.createMessage('That is not a valid command.')
             } else return message.channel.createMessage('How did you get here?');
         }
     }

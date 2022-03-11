@@ -11,7 +11,7 @@ class Languages extends Command {
         })
         this.execute = async(message, args, prisma, guildCf) => {
             if (!message.member.permissions.has("manageChannels")) return message.channel.createMessage('You need `MANAGE_CHANNELS` permission to use this command.');
-            if (!args[0]) return message.channel.createMessage(`The correct usage would be: ${guildCf?.prefix || process.env.PREFIX}languages add English`);
+            if (!args[0]) return message.channel.createMessage(`The correct usage would be: ${guildCf?.prefix || process.env.PREFIX || '?'}languages add English`);
             else if (args[0].toLowerCase() === 'add') {
                 if (!args[1]) return message.channel.createMessage('A language must be provided.');
                 const op = langKeys.filter(a => a === args[1].toLowerCase())[0] || langKeys.filter(lang => languages[lang].name.toLowerCase() === args[1].toLowerCase())[0]

@@ -12,7 +12,7 @@ class Config extends Command {
             if (!guildCf) guildCf = await prisma.guild.create({ data: {id: message.guildID} })
             const tabel = table([
                 ['GuildID', 'Channels', 'Languages', 'Prefix'],
-                [guildCf.id, `${guildCf.channels?.join('\n') || 'None.'}`, `${guildCf.languages?.map(lang => languages[lang].name).join('\n') || 'None.'}`, `${guildCf.prefix || process.env.PREFIX}`]
+                [guildCf.id, `${guildCf.channels?.join('\n') || 'None.'}`, `${guildCf.languages?.map(lang => languages[lang].name).join('\n') || 'None.'}`, `${guildCf.prefix || process.env.PREFIX || '?'}`]
             ], {
                 border: {
                     topBody: `─`,
